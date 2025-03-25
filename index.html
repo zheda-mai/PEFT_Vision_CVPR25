@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Lessons and Insights from a Unifying Study of Parameter-Efficient Fine-Tuning (PEFT) in Visual Recognition">
+  <meta name="keywords" content="ViT PEFT">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lessons and Insights from a Unifying Study of Parameter-Efficient Fine-Tuning (PEFT) in Visual Recognition</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!--<link rel="icon" href="./static/images/favicon.svg">-->
+  
+  <link rel="icon" href="data:image/svg+xml, <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📜</text></svg>">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+            Lessons and Insights from a Unifying Study of Parameter-Efficient Fine-Tuning (PEFT) in Visual Recognition (CVPR 2025)
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://zheda-mai.github.io/">Zheda Mai</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://pizhn.github.io/">Ping Zhang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Cheng-Hao Tu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Hong-You Chen</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://quanghuy0497.github.io/">Quang-Huy Nguyen</a><sup>1</sup>,
+            </span>            
+            <span class="author-block">
+              <a href="">Li Zhang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://sites.google.com/view/wei-lun-harry-chao?pli=1">Wei-Lun Chao</a><sup>1</sup>
+            </span> 
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>The Ohio State University,</span>
+            <span class="author-block"><sup>2</sup>Google</span>
+          </div>
+
+          <div>
+            <p style="font-size: 15px !important;">mai.145@osu.edu</p>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!---
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2409.16434"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>CVPR'25</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/OSU-MLB/ViT_PEFT_Vision"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Parameter-efficient fine-tuning (PEFT) has attracted significant attention due to the growth of pre-trained model sizes and the need to fine-tune (FT) them for superior downstream performance. Despite a surge in new PEFT methods, a systematic study to understand their performance and suitable application scenarios is lacking, leaving questions like "when to apply PEFT" and "which method to use" largely unanswered, especially in visual recognition. In this paper, we conduct a unifying empirical study of representative PEFT methods with Vision Transformers. We systematically tune their hyper-parameters to fairly compare their accuracy on downstream tasks. Our study offers a practical user guide and unveils several new insights. First, if tuned carefully, different PEFT methods achieve similar accuracy in the low-shot benchmark VTAB-1K. This includes simple approaches like FT the bias terms that were reported inferior. Second, despite similar accuracy, we find that PEFT methods make different mistakes and high-confidence predictions, likely due to their different inductive biases. Such an inconsistency (or complementarity) opens up the opportunity for ensemble methods, and we make preliminary attempts at this. Third, going beyond the commonly used low-shot tasks, we find that PEFT is also useful in many-shot regimes, achieving comparable or better accuracy than full FT while using significantly fewer parameters. Lastly, we investigate PEFT's ability to preserve a pre-trained model's robustness to distribution shifts (e.g., CLIP). Perhaps not surprisingly, PEFT approaches outperform full FT alone. However, with weight-space ensembles, full FT can better balance target distribution and distribution shift performance, suggesting a future research direction for robust PEFT.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<!-- Modified Highlights & Insights Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="column is-centered has-text-centered">
+      <h2 class="title is-3">Contributions</h2>
+      <div class="content has-text-justified">
+        <ul>
+          <li>
+            <strong>Fair Benchmarking of PEFT Methods</strong>: We provide a systematic framework with a comprehensive code base implementing 16 PEFT methods, which serves as a valuable resource for consistent and reproducible evaluation.
+          </li>
+          <li>
+            <strong>Practical recommendations in various scenarios</strong>: We provide empirical recommendations on when and how to use different PEFT methods in various scenarios, including low-shots, many-shots, different domain gaps, and robustness between in-distribution and OOD.
+          </li>
+          <li>
+            <strong>Inspiring Future Research</strong>: Our findings offer several insightful directions for future research including <em>leveraging prediction differences</em> in other learning paradigms such as semi-supervised learning, <em>robust fine-tuning with PEFT</em>, and providing <em>empirical evidence for PEFT mechanism understanding</em>.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Visual Effects. -->
+    <div class="column is-centered has-text-centered">
+      <h2 class="title is-3">Highlights of Insihgts</h2>
+      <div class="content has-text-justified">
+        <img src="static/images/main.png" style="" alt="">
+      </div>
+    </div>
+    <!--/ Visual Effects. -->
+
+  </div>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+@article{mai2024lessons,
+  title={Lessons learned from a unifying empirical study of parameter-efficient transfer learning (petl) in visual recognition},
+  author={Mai, Zheda and Zhang, Ping and Tu, Cheng-Hao and Chen, Hong-You and Zhang, Li and Chao, Wei-Lun},
+  journal={arXiv preprint arXiv:2409.16434},
+  year={2024}
+}
+    </code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
